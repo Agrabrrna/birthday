@@ -22,23 +22,45 @@
 @keyframes aurora-b { from { transform: translate3d(0, 0, 0) scale(1.15); } to { transform: translate3d(-14vw, -10vh, 0) scale(0.95); } }
 @keyframes aurora-c { from { transform: translate3d(-8vw, 6vh, 0) scale(0.9); } to { transform: translate3d(10vw, -8vh, 0) scale(1.2); } }
 
-/* ---------- Bintang jatuh (Start the Journey) ---------- */
+/* ---------- Bintang jatuh (Start/Next journey) ---------- */
 
-.shooting-stars { position: fixed; inset: 0; pointer-events: none; z-index: 46; overflow: hidden; }
+.shooting-stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 46;
+  overflow: hidden;
+  background: transparent;
+  transition: background 1s var(--ease-soft);
+}
+body.is-starring .shooting-stars { background: rgba(1, 4, 10, 0.88); }
+
 .shooting-stars i {
   position: absolute;
-  width: 130px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff 55%, rgba(125, 211, 252, 0.95));
   border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9) 60%, #fff);
   filter: drop-shadow(0 0 6px var(--glow));
   opacity: 0;
+  transform-origin: right center;
   animation: star-fall linear forwards;
 }
 @keyframes star-fall {
-  0% { transform: translate3d(0, 0, 0) rotate(-35deg); opacity: 0; }
-  8% { opacity: 1; }
-  100% { transform: translate3d(-78vw, 88vh, 0) rotate(-35deg); opacity: 0; }
+  0% { transform: rotate(var(--ang)) translate3d(0, 0, 0); opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 0.9; }
+  100% { transform: rotate(var(--ang)) translate3d(var(--dist), 0, 0); opacity: 0; }
+}
+
+/* Saat bintang jatuh, konten meredup agar animasi jadi fokus utama */
+.page-inner, .dots, .music-panel {
+  transition: opacity 0.7s var(--ease-soft), transform 0.7s var(--ease-soft);
+}
+body.is-starring .page-inner,
+body.is-starring .dots,
+body.is-starring .music-panel {
+  opacity: 0.06;
+  transform: scale(0.97);
 }
 
 /* ---------- Cursor glow ---------- */

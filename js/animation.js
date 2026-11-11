@@ -92,16 +92,24 @@ const Anim = (() => {
     return finish;
   }
 
-  // ---------- Bintang jatuh saat klik "Start the Journey" ----------
+  // ---------- Bintang jatuh (Start/Next journey) ----------
+  // Hujan meteor: tiap bintang punya sudut, panjang, dan kecepatan sendiri.
   function shootingStars() {
     const wrap = document.getElementById("shooting-stars");
     if (!wrap || reduced) return;
-    for (let i = 0; i < 14; i++) {
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+    document.body.classList.add("is-starring");
+    setTimeout(() => document.body.classList.remove("is-starring"), 3600);
+    for (let i = 0; i < 22; i++) {
       const s = document.createElement("i");
-      s.style.left = random(55, 100) + "vw";
-      s.style.top = random(-5, 30) + "vh";
-      s.style.animationDuration = random(2.2, 4.2) + "s";
-      s.style.animationDelay = random(0, 1.6) + "s";
+      s.style.left = random(-10, 105) + "vw";
+      s.style.top = random(-25, 55) + "vh";
+      s.style.width = random(70, 190) + "px";
+      s.style.setProperty("--ang", random(196, 214).toFixed(1) + "deg");
+      s.style.setProperty("--dist", "-" + random(55, 120).toFixed(0) + "vw");
+      s.style.animationDuration = random(2.6, 5.2) + "s";
+      s.style.animationDelay = random(0, 2.6) + "s";
       wrap.appendChild(s);
       s.addEventListener("animationend", () => s.remove());
     }

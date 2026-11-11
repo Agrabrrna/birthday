@@ -49,8 +49,11 @@ const Nav = (() => {
   document.addEventListener("click", (e) => {
     const next = e.target.closest("[data-next]");
     const back = e.target.closest("[data-back]");
-    if (next && !next.disabled) go(next.dataset.next);
-    else if (back) go(back.dataset.back);
+    if (next && !next.disabled) {
+      // Animasi bintang fokus dulu, baru pindah halaman (teks baru muncul bertahap).
+      Anim.shootingStars();
+      setTimeout(() => go(next.dataset.next), 3600);
+    } else if (back) go(back.dataset.back);
   });
 
   render(PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : "welcome");

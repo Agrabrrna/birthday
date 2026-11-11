@@ -34,7 +34,12 @@
   $("welcome-subtitle").textContent = CONFIG.welcome.subtitle;
   $("btn-start").textContent = CONFIG.welcome.startButton;
   $("welcome-recipient").textContent = CONFIG.recipientName;
-  $("btn-start").addEventListener("click", () => Anim.shootingStars());
+  $("btn-start").addEventListener("click", (e) => {
+    // Cegah navigasi langsung; bintang jatuh dulu, teks menyusul.
+    e.stopPropagation();
+    Anim.shootingStars();
+    setTimeout(() => Nav.go("birthday"), 4000);
+  });
 
   // ---------- Birthday ----------
   $("birthday-greeting").textContent = CONFIG.birthday.greeting;
