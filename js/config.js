@@ -31,7 +31,7 @@ const CONFIG = {
   ],
 
   letter: [
-    "Sudah 24 tahun, ya. Rasanya ada banyak hal yang sudah kamu lewati sampai akhirnya bisa berada di titik ini. Aku cuma mau berharap semoga di usia yang baru nanti, hidup kak novi bisa lebih ramah sama kakak.",
+    "Sudah 24 tahun ya kak novi. Rasanya ada banyak hal yang sudah kak nop lewati sampai akhirnya bisa berada di titik ini. Cuma mau berharap semoga di usia yang baru nanti, hidup kak novi bisa lebih ramah sama kakak.",
     "Semoga hal-hal yang selama ini kak novi usahakan bisa menemukan hasil terbaiknya. Semoga selalu dikelilingi orang-orang yang tulus, dipertemukan dengan banyak kebahagiaan kecil, dan enggak pernah kehilangan alasan untuk tersenyum (cause i like your smile).",
     "Kalau suatu hari semuanya terasa berat, semoga kak novi ingat kalau kamu enggak harus selalu baik-baik saja. Tidak apa-apa untuk istirahat, bingung, atau bahkan merasa tertinggal. Kak novi punya waktu sendiri, jadi jangan terlalu sering membandingkan perjalanan kamu dengan orang lain.",
     "Terima kasih sudah menjadi bagian dari cerita dan hari-hari yang ada. Aku harap di usia 24 ini, kakak bisa lebih banyak menemukan hal yang membuat kak novi bahagia, lebih sedikit memikirkan hal yang menyakitkan, dan semakin menyayangi diri sendiri.",

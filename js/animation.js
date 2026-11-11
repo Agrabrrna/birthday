@@ -1,6 +1,6 @@
-// Animasi & partikel. Semua dekorasi dimatikan otomatis oleh CSS prefers-reduced-motion.
+// Animasi & partikel. Selalu aktif — lihat catatan di css/responsive.css.
 const Anim = (() => {
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = false;
 
   function random(min, max) { return Math.random() * (max - min) + min; }
 
@@ -47,9 +47,9 @@ const Anim = (() => {
     });
   }
 
-  // Munculkan baris satu per satu (subtitle film)
+  // Munculkan baris satu per satu (subtitle film) — pelan agar senapas lagu.
   let lineTimers = [];
-  function revealLines(container, delay = 700) {
+  function revealLines(container, delay = 1100) {
     lineTimers.forEach(clearTimeout);
     lineTimers = [];
     const items = container.querySelectorAll("p, .ending-signature, .ending-quote, .ending-fin");
@@ -85,12 +85,72 @@ const Anim = (() => {
       if (!pEl) { pEl = document.createElement("p"); container.appendChild(pEl); }
       const text = paragraphs[pi];
       pEl.textContent = text.slice(0, ++ci);
-      if (ci >= text.length) { pi++; ci = 0; pEl = null; timer = setTimeout(step, 450); }
-      else timer = setTimeout(step, 18);
+      if (ci >= text.length) { pi++; ci = 0; pEl = null; timer = setTimeout(step, 800); }
+      else timer = setTimeout(step, 28);
     }
     step();
     return finish;
   }
 
-  return { reduced, tiltPolaroids, revealLines, typeLetter };
+  // ---------- Bintang jatuh saat klik "Start the Journey" ----------
+  function shootingStars() {
+    const wrap = document.getElementById("shooting-stars");
+    if (!wrap || reduced) return;
+    for (let i = 0; i < 14; i++) {
+      const s = document.createElement("i");
+      s.style.left = random(55, 100) + "vw";
+      s.style.top = random(-5, 30) + "vh";
+      s.style.animationDuration = random(2.2, 4.2) + "s";
+      s.style.animationDelay = random(0, 1.6) + "s";
+      wrap.appendChild(s);
+      s.addEventListener("animationend", () => s.remove());
+    }
+  }
+
+  // ---------- Interaksi kursor: glow mengikuti pointer + tilt kartu ----------
+  const glow = document.getElementById("cursor-glow");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (glow && finePointer && !reduced) {
+    document.body.classList.add("has-pointer");
+    let gx = 0, gy = 0, cx = 0, cy = 0, raf = null;
+    function loop() {
+      cx += (gx - cx) * 0.12;
+      cy += (gy - cy) * 0.12;
+      glow.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
+      raf = Math.abs(gx - cx) + Math.abs(gy - cy) > 0.5 ? requestAnimationFrame(loop) : null;
+    }
+    window.addEventListener("pointermove", (e) => {
+      gx = e.clientX; gy = e.clientY;
+      if (!raf) raf = requestAnimationFrame(loop);
+    }, { passive: true });
+
+    // Tilt 3D halus pada kartu (polaroid & kotak hadiah)
+    document.addEventListener("pointermove", (e) => {
+      const card = e.target.closest(".polaroid, .gift-box");
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = "perspective(700px) rotateY(" + (px * 10).toFixed(2) + "deg) rotateX(" + (-py * 10).toFixed(2) + "deg) translateY(-6px)";
+    }, { passive: true });
+    document.addEventListener("pointerout", (e) => {
+      const card = e.target.closest(".polaroid, .gift-box");
+      if (card) card.style.transform = "";
+    }, { passive: true });
+  }
+
+  // ---------- Scroll progress ----------
+  const bar = document.getElementById("scroll-progress");
+  if (bar) {
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = "scaleX(" + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ")";
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    document.addEventListener("page:changed", update);
+    update();
+  }
+
+  return { reduced, tiltPolaroids, revealLines, typeLetter, shootingStars };
 })();

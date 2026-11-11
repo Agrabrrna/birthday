@@ -12,7 +12,6 @@
   .gallery { grid-template-columns: repeat(4, 1fr); }
   .gift-grid { grid-template-columns: repeat(5, 1fr); }
   .page-inner { padding-bottom: calc(var(--space-4) + 6rem); }
-
   /* Panel musik pindah ke pojok kanan bawah */
   .music-panel {
     left: auto;
@@ -24,7 +23,7 @@
     flex-direction: column;
     align-items: stretch;
   }
-  .music-frame { width: 100%; height: 80px; }
+  .vinyl { align-self: center; width: 104px; height: 104px; }
   .dots { bottom: var(--space-2); }
 }
 
@@ -42,15 +41,7 @@
   .starfield i:nth-child(n + 21) { display: none; }
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  html { scroll-behavior: auto; }
-  .grain, .light-leak, .dust, .floaties, .sky-decor { display: none; }
-  .welcome-title, .welcome-subtitle, #btn-start, .welcome-hint { opacity: 1; animation: none; }
-  .subtitle-lines p, .ending-body p, .ending-signature, .ending-quote, .ending-fin, .wa-bubble { opacity: 1; transform: none; }
-}
+/* Animasi selalu aktif (situs hadiah pribadi).
+   ponytail: prefers-reduced-motion diabaikan karena Windows user sering OFF-kan
+   "Animation effects" sehingga Chrome melaporkan reduce. Kalau perlu aksesibilitas,
+   tambahkan toggle manual (mis. tombol "kurangi animasi") yang men-set class di <body>. */

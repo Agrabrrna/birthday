@@ -34,6 +34,7 @@
   $("welcome-subtitle").textContent = CONFIG.welcome.subtitle;
   $("btn-start").textContent = CONFIG.welcome.startButton;
   $("welcome-recipient").textContent = CONFIG.recipientName;
+  $("btn-start").addEventListener("click", () => Anim.shootingStars());
 
   // ---------- Birthday ----------
   $("birthday-greeting").textContent = CONFIG.birthday.greeting;
@@ -232,15 +233,15 @@
 
   // ---------- Animasi per halaman ----------
   document.addEventListener("page:changed", (e) => {
-    if (e.detail.id === "birthday") Anim.revealLines($("birthday-lines"), 900);
+    if (e.detail.id === "birthday") Anim.revealLines($("birthday-lines"), 1200);
     if (e.detail.id === "ending") {
-      Anim.revealLines($("ending-body"), 1400);
-      const total = CONFIG.ending.length * 1400 + 800;
+      Anim.revealLines($("ending-body"), 1800);
+      const total = CONFIG.ending.length * 1800 + 1000;
       [$("ending-quote"), fin].forEach((el, i) => {
-        setTimeout(() => el.classList.add("is-shown"), Anim.reduced ? 0 : total + i * 1200);
+        setTimeout(() => el.classList.add("is-shown"), Anim.reduced ? 0 : total + i * 1600);
       });
     }
   });
   // Halaman awal saat load dengan hash langsung
-  if (Nav.current === "birthday") Anim.revealLines($("birthday-lines"), 900);
+  if (Nav.current === "birthday") Anim.revealLines($("birthday-lines"), 1200);
 })();

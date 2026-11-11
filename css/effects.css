@@ -3,6 +3,79 @@
    Semua dekoratif — pointer-events: none, aria-hidden di HTML.
    ============================================================ */
 
+/* ---------- Aurora (latar bergerak) ---------- */
+
+.aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.aurora-blob {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.aurora-1 { top: -22vmax; left: -14vmax; background: radial-gradient(circle, rgba(56, 189, 248, 0.55), transparent 68%); animation: aurora-a 26s ease-in-out infinite alternate; }
+.aurora-2 { bottom: -26vmax; right: -16vmax; background: radial-gradient(circle, rgba(129, 140, 248, 0.45), transparent 68%); animation: aurora-b 32s ease-in-out infinite alternate; }
+.aurora-3 { top: 30%; left: 40%; background: radial-gradient(circle, rgba(14, 165, 233, 0.35), transparent 70%); animation: aurora-c 38s ease-in-out infinite alternate; }
+@keyframes aurora-a { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(12vw, 8vh, 0) scale(1.25); } }
+@keyframes aurora-b { from { transform: translate3d(0, 0, 0) scale(1.15); } to { transform: translate3d(-14vw, -10vh, 0) scale(0.95); } }
+@keyframes aurora-c { from { transform: translate3d(-8vw, 6vh, 0) scale(0.9); } to { transform: translate3d(10vw, -8vh, 0) scale(1.2); } }
+
+/* ---------- Bintang jatuh (Start the Journey) ---------- */
+
+.shooting-stars { position: fixed; inset: 0; pointer-events: none; z-index: 46; overflow: hidden; }
+.shooting-stars i {
+  position: absolute;
+  width: 130px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff 55%, rgba(125, 211, 252, 0.95));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px var(--glow));
+  opacity: 0;
+  animation: star-fall linear forwards;
+}
+@keyframes star-fall {
+  0% { transform: translate3d(0, 0, 0) rotate(-35deg); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translate3d(-78vw, 88vh, 0) rotate(-35deg); opacity: 0; }
+}
+
+/* ---------- Cursor glow ---------- */
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 420px;
+  margin: -210px 0 0 -210px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 47;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.22), rgba(56, 189, 248, 0.06) 45%, transparent 70%);
+  transition: opacity 0.5s var(--ease-soft);
+  will-change: transform;
+}
+body.has-pointer .cursor-glow { opacity: 1; }
+
+/* ---------- Scroll progress ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent), var(--violet));
+  box-shadow: 0 0 12px var(--glow);
+  z-index: 60;
+  pointer-events: none;
+}
+
 .grain {
   position: fixed;
   inset: -10%;
@@ -28,15 +101,15 @@ body.on-ending .grain { opacity: 0.18; }
   z-index: 49;
   mix-blend-mode: screen;
   background:
-    radial-gradient(circle at 0% 20%, rgba(255, 190, 140, 0.35), transparent 45%),
-    radial-gradient(circle at 100% 80%, rgba(142, 197, 232, 0.35), transparent 50%);
+    radial-gradient(circle at 0% 20%, rgba(56, 189, 248, 0.28), transparent 45%),
+    radial-gradient(circle at 100% 80%, rgba(129, 140, 248, 0.28), transparent 50%);
   animation: leak-pulse 8s ease-in-out infinite alternate;
 }
 @keyframes leak-pulse { from { opacity: 0.5; } to { opacity: 1; } }
 body.on-ending .light-leak {
   background:
-    radial-gradient(circle at 0% 100%, rgba(255, 190, 140, 0.3), transparent 50%),
-    radial-gradient(circle at 100% 0%, rgba(255, 210, 160, 0.22), transparent 45%);
+    radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.3), transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.26), transparent 45%);
 }
 
 /* ---------- Dust ---------- */

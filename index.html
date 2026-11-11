@@ -123,13 +123,19 @@
   <nav id="dots" class="dots" aria-label="Navigasi bagian"></nav>
 
   <aside id="music-panel" class="music-panel" aria-label="Pemutar musik">
-    <div class="music-frame"><div id="yt-player"></div></div>
+    <div id="vinyl" class="vinyl" aria-hidden="true">
+      <div class="vinyl-disc">
+        <span class="vinyl-label"><span class="vinyl-hole"></span></span>
+      </div>
+      <span class="vinyl-arm"></span>
+    </div>
     <div class="music-controls">
       <span id="music-title" class="music-title"></span>
-      <button id="btn-play" class="btn btn-small btn-primary" type="button">▶ Play the song</button>
-      <button id="btn-pause" class="btn btn-small btn-ghost" type="button" hidden>❚❚ Pause</button>
+      <button id="btn-play" class="btn btn-small btn-primary" type="button">▶ Putar lagu</button>
+      <button id="btn-pause" class="btn btn-small btn-ghost" type="button" hidden>❚❚ Jeda</button>
       <a id="music-fallback" class="music-fallback" href="#" target="_blank" rel="noopener" hidden>Buka lagu di YouTube ↗</a>
     </div>
+    <div class="yt-hidden" aria-hidden="true"><div id="yt-player"></div></div>
   </aside>
 
   <!-- Dialogs -->
@@ -171,6 +177,14 @@
   </dialog>
 
   <!-- Efek film (dekorasi) -->
+  <div class="aurora" aria-hidden="true">
+    <span class="aurora-blob aurora-1"></span>
+    <span class="aurora-blob aurora-2"></span>
+    <span class="aurora-blob aurora-3"></span>
+  </div>
+  <div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
+  <div id="shooting-stars" class="shooting-stars" aria-hidden="true"></div>
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
   <div id="dust" class="dust" aria-hidden="true"></div>
   <div class="light-leak" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
