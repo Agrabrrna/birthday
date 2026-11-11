@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="A little story, made for someone special.">
+  <title>Somewhere Under The Same Sky</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/effects.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- 1. Welcome -->
+    <section id="welcome" class="page is-active" aria-label="Sambutan">
+      <div class="sky-decor" aria-hidden="true">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+      <div class="page-inner welcome-inner">
+        <p class="eyebrow">sebuah film kecil untukmu</p>
+        <h1 id="welcome-title" class="welcome-title"></h1>
+        <p id="welcome-subtitle" class="welcome-subtitle"></p>
+        <button id="btn-start" class="btn btn-primary" type="button" data-next="birthday"></button>
+        <p class="welcome-hint">♡ dibuat dengan niat baik, untuk <span id="welcome-recipient"></span></p>
+      </div>
+    </section>
+
+    <!-- 2. Birthday -->
+    <section id="birthday" class="page" aria-label="Ucapan ulang tahun">
+      <div class="floaties" aria-hidden="true"></div>
+      <div class="page-inner">
+        <p class="eyebrow">scene 01 · the celebration</p>
+        <h2 id="birthday-greeting" class="section-title"></h2>
+        <div id="birthday-lines" class="subtitle-lines"></div>
+        <div class="page-actions">
+          <button class="btn btn-ghost" type="button" data-back="welcome">Kembali</button>
+          <button class="btn btn-primary" type="button" data-next="memories">Next Journey</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Memories -->
+    <section id="memories" class="page" aria-label="Kenangan">
+      <div class="page-inner page-inner-wide">
+        <p class="eyebrow">scene 02 · the memories</p>
+        <h2 class="section-title">Sepotong kenangan,<br>seperti foto di meja.</h2>
+        <p class="section-note">Ketuk salah satu polaroid untuk melihat lebih dekat.</p>
+        <div id="gallery" class="gallery"></div>
+        <div class="page-actions">
+          <button class="btn btn-ghost" type="button" data-back="birthday">Kembali</button>
+          <button class="btn btn-primary" type="button" data-next="letter">Next Journey</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Letter -->
+    <section id="letter" class="page" aria-label="Surat">
+      <div class="page-inner">
+        <p class="eyebrow">scene 03 · the letter</p>
+        <h2 class="section-title">Ada surat untukmu.</h2>
+
+        <div id="envelope-stage" class="envelope-stage">
+          <button id="envelope" class="envelope" type="button" aria-expanded="false" aria-controls="letter-paper">
+            <span class="envelope-body" aria-hidden="true"></span>
+            <span class="envelope-letter-peek" aria-hidden="true"></span>
+            <span class="envelope-flap" aria-hidden="true"></span>
+            <span class="envelope-seal" aria-hidden="true">✦</span>
+            <span class="envelope-label">Ketuk untuk membuka</span>
+          </button>
+        </div>
+
+        <article id="letter-paper" class="letter-paper" hidden>
+          <p class="letter-to">Untuk <span id="letter-recipient"></span>,</p>
+          <div id="letter-body" class="letter-body"></div>
+          <p class="letter-from">— dengan hangat, <span id="letter-sender"></span></p>
+          <button id="btn-skip-typing" class="btn btn-ghost btn-small" type="button">Lewati animasi</button>
+        </article>
+
+        <div class="page-actions">
+          <button class="btn btn-ghost" type="button" data-back="memories">Kembali</button>
+          <button class="btn btn-primary" type="button" data-next="gifts">Next Journey</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Little Gifts -->
+    <section id="gifts" class="page" aria-label="Hadiah kecil">
+      <div class="page-inner page-inner-wide">
+        <p class="eyebrow">scene 04 · the little gifts</p>
+        <h2 class="section-title">Beberapa hadiah kecil.</h2>
+        <p class="section-note">Tidak harus dibuka semua — satu saja cukup untuk melanjutkan. <span id="gift-counter" class="gift-counter" role="status">0/4 terbuka</span></p>
+        <div id="gift-grid" class="gift-grid"></div>
+        <p class="secret-hint">psst… ada satu kotak yang sedikit berbeda.</p>
+        <div class="page-actions">
+          <button class="btn btn-ghost" type="button" data-back="letter">Kembali</button>
+          <button id="btn-gifts-next" class="btn btn-primary" type="button" data-next="ending" disabled>Next Journey</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Ending -->
+    <section id="ending" class="page page-dark" aria-label="Penutup">
+      <div id="starfield" class="starfield" aria-hidden="true"></div>
+      <div class="page-inner ending-inner">
+        <p class="eyebrow">final scene · the end</p>
+        <div id="ending-body" class="ending-body"></div>
+        <p id="ending-signature" class="ending-signature"></p>
+        <p id="ending-quote" class="ending-quote"></p>
+        <p class="ending-fin" aria-hidden="true">— fin —</p>
+        <button id="btn-replay" class="btn btn-ghost" type="button">↺ Replay</button>
+      </div>
+    </section>
+
+  </main>
+
+  <nav id="dots" class="dots" aria-label="Navigasi bagian"></nav>
+
+  <aside id="music-panel" class="music-panel" aria-label="Pemutar musik">
+    <div class="music-frame"><div id="yt-player"></div></div>
+    <div class="music-controls">
+      <span id="music-title" class="music-title"></span>
+      <button id="btn-play" class="btn btn-small btn-primary" type="button">▶ Play the song</button>
+      <button id="btn-pause" class="btn btn-small btn-ghost" type="button" hidden>❚❚ Pause</button>
+      <a id="music-fallback" class="music-fallback" href="#" target="_blank" rel="noopener" hidden>Buka lagu di YouTube ↗</a>
+    </div>
+  </aside>
+
+  <!-- Dialogs -->
+  <dialog id="lightbox" class="lightbox" aria-label="Foto kenangan">
+    <figure class="lightbox-figure">
+      <div id="lightbox-media" class="lightbox-media"></div>
+      <figcaption id="lightbox-caption" class="lightbox-caption"></figcaption>
+    </figure>
+    <button id="lightbox-close" class="dialog-close" type="button" aria-label="Tutup foto">✕</button>
+  </dialog>
+
+  <dialog id="gift-modal" class="gift-modal" aria-labelledby="gift-modal-title">
+    <div class="gift-card">
+      <p class="gift-card-eyebrow">sebuah hadiah kecil</p>
+      <h3 id="gift-modal-title" class="gift-modal-title"></h3>
+      <div id="gift-modal-photo" class="gift-modal-photo" hidden></div>
+      <p id="gift-modal-message" class="gift-modal-message"></p>
+      <button id="gift-modal-close" class="btn btn-primary btn-small" type="button">Simpan di hati ♡</button>
+    </div>
+  </dialog>
+
+  <dialog id="secret-modal" class="secret-modal" aria-label="Pesan rahasia">
+    <div class="wa-phone">
+      <header class="wa-header">
+        <button id="secret-back" class="wa-back" type="button" aria-label="Tutup chat">‹</button>
+        <div id="wa-avatar" class="wa-avatar" aria-hidden="true"></div>
+        <div class="wa-contact">
+          <span id="wa-name" class="wa-name"></span>
+          <span class="wa-status">online</span>
+        </div>
+        <span class="wa-header-icons" aria-hidden="true">📹 ☎</span>
+      </header>
+      <div id="wa-chat" class="wa-chat" aria-live="polite"></div>
+      <footer class="wa-input" aria-hidden="true">
+        <span class="wa-input-box">Ketik pesan…</span>
+        <span class="wa-mic">🎤</span>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Efek film (dekorasi) -->
+  <div id="dust" class="dust" aria-hidden="true"></div>
+  <div class="light-leak" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

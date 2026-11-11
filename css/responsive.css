@@ -1,0 +1,56 @@
+/* ============================================================
+   Responsive — mobile-first, tambah untuk layar besar
+   ============================================================ */
+
+@media (min-width: 600px) {
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+  .gift-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+  .letter-paper { padding: var(--space-4); }
+}
+
+@media (min-width: 1024px) {
+  .gallery { grid-template-columns: repeat(4, 1fr); }
+  .gift-grid { grid-template-columns: repeat(5, 1fr); }
+  .page-inner { padding-bottom: calc(var(--space-4) + 6rem); }
+
+  /* Panel musik pindah ke pojok kanan bawah */
+  .music-panel {
+    left: auto;
+    right: var(--space-2);
+    transform: none;
+    bottom: var(--space-2);
+    border-radius: var(--radius);
+    width: 300px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .music-frame { width: 100%; height: 80px; }
+  .dots { bottom: var(--space-2); }
+}
+
+/* Layar pendek / landscape HP: kurangi dekorasi dan jarak */
+@media (max-height: 520px) {
+  .welcome-inner { padding-top: var(--space-3); }
+  .cloud-3, .floaties span:nth-child(n + 8) { display: none; }
+  .page-inner { padding-top: var(--space-3); }
+  .envelope { height: 150px; }
+}
+
+/* Layar kecil: partikel dikurangi */
+@media (max-width: 599px) {
+  .dust i:nth-child(n + 13) { display: none; }
+  .starfield i:nth-child(n + 21) { display: none; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .grain, .light-leak, .dust, .floaties, .sky-decor { display: none; }
+  .welcome-title, .welcome-subtitle, #btn-start, .welcome-hint { opacity: 1; animation: none; }
+  .subtitle-lines p, .ending-body p, .ending-signature, .ending-quote, .ending-fin, .wa-bubble { opacity: 1; transform: none; }
+}

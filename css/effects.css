@@ -1,0 +1,122 @@
+/* ============================================================
+   Efek film: grain, light leak, dust, awan, floaties, bintang
+   Semua dekoratif — pointer-events: none, aria-hidden di HTML.
+   ============================================================ */
+
+.grain {
+  position: fixed;
+  inset: -10%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation: grain-shift 0.8s steps(4) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-3%, 2%); }
+  50%  { transform: translate(2%, -3%); }
+  75%  { transform: translate(-2%, -2%); }
+  100% { transform: translate(0, 0); }
+}
+body.on-ending .grain { opacity: 0.18; }
+
+.light-leak {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 49;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 0% 20%, rgba(255, 190, 140, 0.35), transparent 45%),
+    radial-gradient(circle at 100% 80%, rgba(142, 197, 232, 0.35), transparent 50%);
+  animation: leak-pulse 8s ease-in-out infinite alternate;
+}
+@keyframes leak-pulse { from { opacity: 0.5; } to { opacity: 1; } }
+body.on-ending .light-leak {
+  background:
+    radial-gradient(circle at 0% 100%, rgba(255, 190, 140, 0.3), transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(255, 210, 160, 0.22), transparent 45%);
+}
+
+/* ---------- Dust ---------- */
+
+.dust { position: fixed; inset: 0; pointer-events: none; z-index: 48; overflow: hidden; }
+.dust i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(251, 250, 247, 0.55);
+  animation: dust-drift linear infinite;
+}
+@keyframes dust-drift {
+  from { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.5; }
+  to { transform: translate(6vw, -110vh); opacity: 0; }
+}
+
+/* ---------- Awan (welcome) ---------- */
+
+.sky-decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.cloud {
+  position: absolute;
+  width: 220px;
+  height: 60px;
+  border-radius: 999px;
+  background: rgba(251, 250, 247, 0.5);
+  filter: blur(14px);
+  animation: cloud-drift linear infinite;
+}
+.cloud::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  top: -24px;
+  left: 40px;
+  border-radius: 999px;
+  background: inherit;
+}
+.cloud-1 { top: 12%; left: -240px; animation-duration: 70s; }
+.cloud-2 { top: 30%; left: -240px; animation-duration: 95s; animation-delay: -30s; transform: scale(0.7); }
+.cloud-3 { top: 62%; left: -240px; animation-duration: 120s; animation-delay: -60s; transform: scale(1.3); opacity: 0.7; }
+@keyframes cloud-drift {
+  from { translate: 0 0; }
+  to { translate: calc(100vw + 480px) 0; }
+}
+
+/* ---------- Floaties (birthday) ---------- */
+
+.floaties { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.floaties span {
+  position: absolute;
+  bottom: -8%;
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: float-up linear infinite;
+}
+@keyframes float-up {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-115vh) rotate(24deg); opacity: 0; }
+}
+
+/* ---------- Starfield (ending) ---------- */
+
+.starfield { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.starfield i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--ivory);
+  opacity: 0;
+  animation: star-twinkle 3.5s ease-in-out infinite;
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.2); }
+}
