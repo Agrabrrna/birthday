@@ -641,6 +641,22 @@ dialog::backdrop { background: rgba(20, 30, 40, 0.72); backdrop-filter: blur(4px
 .gift-modal-message { font-size: 0.98rem; text-align: left; }
 .gift-modal-photo img, .gift-modal-photo .photo-placeholder { border-radius: 3px; margin-bottom: var(--space-2); width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
+/* ---------- Buket bunga kartun (hadiah) ---------- */
+
+.gift-modal-flower { margin: var(--space-2) auto; }
+.bouquet { display: block; width: 190px; height: auto; margin: 0 auto; }
+.bq-flower {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  opacity: 0;
+  animation: bq-bloom 0.8s var(--ease-soft) forwards;
+  animation-delay: calc(0.35s + var(--d));
+}
+@keyframes bq-bloom {
+  from { opacity: 0; transform: scale(0.2); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 /* ---------- WhatsApp secret ---------- */
 
 .wa-phone {

@@ -103,11 +103,17 @@ const Anim = (() => {
     setTimeout(() => document.body.classList.remove("is-starring"), 3600);
     for (let i = 0; i < 22; i++) {
       const s = document.createElement("i");
-      s.style.left = random(-10, 105) + "vw";
-      s.style.top = random(-25, 55) + "vh";
+      // Mulai dari kanan-atas, melintasi tengah layar ke kiri-bawah.
+      const sx = random(70, 120) / 100 * vw;
+      const sy = random(-20, 10) / 100 * vh;
+      const tx = random(-20, 30) / 100 * vw;
+      const ty = random(60, 110) / 100 * vh;
+      const dx = tx - sx, dy = ty - sy;
+      s.style.left = sx + "px";
+      s.style.top = sy + "px";
       s.style.width = random(70, 190) + "px";
-      s.style.setProperty("--ang", random(196, 214).toFixed(1) + "deg");
-      s.style.setProperty("--dist", "-" + random(55, 120).toFixed(0) + "vw");
+      s.style.setProperty("--ang", (Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1) + "deg");
+      s.style.setProperty("--dist", (Math.hypot(dx, dy) * 1.7).toFixed(0) + "px");
       s.style.animationDuration = random(2.6, 5.2) + "s";
       s.style.animationDelay = random(0, 2.6) + "s";
       wrap.appendChild(s);

@@ -121,6 +121,51 @@
     return box;
   }
 
+  // Buket bunga kartun (SVG): 5 bunga warna-warni dalam pot, mekar saat modal dibuka.
+  function flowerMarkup() {
+    const COLORS = [
+      ["#fbcfe8", "#ec4899"], // pink
+      ["#bfdbfe", "#3b82f6"], // biru
+      ["#fef3c7", "#f59e0b"], // kuning
+      ["#ddd6fe", "#8b5cf6"], // ungu
+      ["#fecdd3", "#f43f5e"], // merah muda
+    ];
+    const flowers = [
+      { x: 100, y: 78, r: 1.15 },
+      { x: 58, y: 96, r: 0.95 },
+      { x: 142, y: 96, r: 0.95 },
+      { x: 34, y: 122, r: 0.8 },
+      { x: 166, y: 122, r: 0.8 },
+    ]
+      .map((f, i) => {
+        const [light, dark] = COLORS[i];
+        const petals = Array.from({ length: 8 }, (_, p) =>
+          '<circle cx="0" cy="-16" r="10" fill="' + light + '" stroke="' + dark + '" stroke-width="2" transform="rotate(' + p * 45 + ')"/>'
+        ).join("");
+        return (
+          '<g class="bq-flower bq-f' + i + '" style="--d:' + (i * 0.12).toFixed(2) + 's">' +
+          '<path d="M' + f.x + " " + f.y + " L100 168" + '" stroke="#16a34a" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+          '<g transform="translate(' + f.x + "," + f.y + ") scale(" + f.r + ')">' +
+          petals +
+          '<circle r="8" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>' +
+          "</g></g>"
+        );
+      })
+      .join("");
+    return (
+      '<svg class="bouquet" viewBox="0 0 200 210" aria-hidden="true">' +
+      '<path d="M60 118 Q40 140 52 160" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+      '<ellipse cx="46" cy="150" rx="10" ry="6" fill="#4ade80" transform="rotate(-30 46 150)"/>' +
+      '<path d="M140 118 Q160 140 148 160" stroke="#22c55e" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+      '<ellipse cx="154" cy="150" rx="10" ry="6" fill="#4ade80" transform="rotate(30 154 150)"/>' +
+      flowers +
+      '<path d="M62 150 L138 150 L128 200 L72 200 Z" fill="#fb923c" stroke="#ea580c" stroke-width="3"/>' +
+      '<rect x="56" y="144" width="88" height="14" rx="7" fill="#fdba74" stroke="#ea580c" stroke-width="3"/>' +
+      '<path d="M84 172 q16 10 32 0" stroke="#7c2d12" stroke-width="3" fill="none" stroke-linecap="round" opacity=".5"/>' +
+      "</svg>"
+    );
+  }
+
   CONFIG.gifts.forEach((g, i) => {
     const box = makeGiftBox(g.title, icons[g.icon] || "🎁");
     box.addEventListener("click", () => {
@@ -133,6 +178,18 @@
       photoWrap.innerHTML = "";
       photoWrap.hidden = !("photo" in g);
       if ("photo" in g) photoWrap.appendChild(photoNode(g.photo, "Foto kejutan", "foto kejutan ♡"));
+      const flowerWrap = $("gift-modal-flower");
+      if (flowerWrap) {
+        flowerWrap.innerHTML = "";
+        flowerWrap.hidden = !g.flowerPhoto;
+        if (g.flowerPhoto) {
+          const img = document.createElement("img");
+          img.src = g.flowerPhoto;
+          img.alt = "Buket bunga";
+          img.loading = "lazy";
+          flowerWrap.appendChild(img);
+        }
+      }
       openDialog(giftModal, box);
     });
     giftGrid.appendChild(box);
@@ -141,7 +198,7 @@
   // Hadiah rahasia: chat WhatsApp
   const secret = CONFIG.secretGift;
   const secretModal = $("secret-modal");
-  const secretBox = makeGiftBox("Kado ??? ", "❓");
+  const secretBox = makeGiftBox("Seseorang mengucapkan sesuatu?!", " ");
   secretBox.classList.add("is-secret");
   secretBox.setAttribute("aria-label", "Buka hadiah rahasia");
   giftGrid.appendChild(secretBox);
