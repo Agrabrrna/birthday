@@ -99,25 +99,26 @@ const Anim = (() => {
     if (!wrap || reduced) return;
     const vw = document.documentElement.clientWidth;
     const vh = document.documentElement.clientHeight;
+    const small = vw <= 599; // iPhone 8/HP: kurangi beban animasi
     document.body.classList.add("is-starring");
-    setTimeout(() => document.body.classList.remove("is-starring"), 3600);
-    for (let i = 0; i < 22; i++) {
-      const s = document.createElement("i");
+    setTimeout(() => document.body.classList.remove("is-starring"), small ? 3000 : 3600);
+    for (let i = 0; i < (small ? 11 : 22); i++) {
+          const s = document.createElement("i");
           // Mulai dari kiri-atas, melintasi tengah layar ke kanan-bawah.
           const sx = random(-20, 10) / 100 * vw;
-      const sy = random(-20, 10) / 100 * vh;
+          const sy = random(-20, 10) / 100 * vh;
           const tx = random(70, 120) / 100 * vw;
-      const ty = random(60, 110) / 100 * vh;
-      const dx = tx - sx, dy = ty - sy;
-      s.style.left = sx + "px";
-      s.style.top = sy + "px";
-      s.style.width = random(70, 190) + "px";
-      s.style.setProperty("--ang", (Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1) + "deg");
-      s.style.setProperty("--dist", (Math.hypot(dx, dy) * 1.7).toFixed(0) + "px");
-      s.style.animationDuration = random(2.6, 5.2) + "s";
-      s.style.animationDelay = random(0, 2.6) + "s";
-      wrap.appendChild(s);
-      s.addEventListener("animationend", () => s.remove());
+          const ty = random(60, 110) / 100 * vh;
+          const dx = tx - sx, dy = ty - sy;
+          s.style.left = sx + "px";
+          s.style.top = sy + "px";
+          s.style.width = random(small ? 50 : 70, small ? 120 : 190) + "px";
+          s.style.setProperty("--ang", (Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1) + "deg");
+          s.style.setProperty("--dist", (Math.hypot(dx, dy) * 1.7).toFixed(0) + "px");
+          s.style.animationDuration = random(small ? 1.8 : 2.6, small ? 3.4 : 5.2) + "s";
+          s.style.animationDelay = random(0, small ? 1.6 : 2.6) + "s";
+          wrap.appendChild(s);
+          s.addEventListener("animationend", () => s.remove());
     }
   }
 
