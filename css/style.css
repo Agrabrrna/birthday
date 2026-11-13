@@ -687,7 +687,7 @@ dialog::backdrop { background: rgba(20, 30, 40, 0.72); backdrop-filter: blur(4px
   50% { opacity: 0.14; transform: scale(1.06); }
 }
 
-.gift-modal-flower { margin: var(--space-2) auto; text-align: center; }
+.gift-modal-flower { margin: var(--space-2) auto; display: flex; justify-content: center; }
 .gift-modal-flower img {
   width: min(60vw, 220px);
   border-radius: 14px;

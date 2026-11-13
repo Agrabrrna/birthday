@@ -51,7 +51,7 @@ const CONFIG = {
       title: "Kado Kedua",
       icon: "sea",
           cake: true,
-          message: "Seperti laut yang kadang tenang dan kadang punya ombak besar, hidup juga terasa seperti itu. Kalau suatu saat semuanya terasa melelahkan, jangan lupa untuk istirahat. Kak novi enggak harus selalu kuat setiap waktu. Take your time, everything has its own pace.",
+          message: "Birthday cake to someone who deserves all the beautiful things in life, before turn off the candles, don't forget to make a wish. May this year bring you more happiness than you imagined, more love than you expected, and more beautiful moments than you could ever count.",
         },
     {
       title: "Kado Terakhir",

@@ -103,10 +103,10 @@ const Anim = (() => {
     setTimeout(() => document.body.classList.remove("is-starring"), 3600);
     for (let i = 0; i < 22; i++) {
       const s = document.createElement("i");
-      // Mulai dari kanan-atas, melintasi tengah layar ke kiri-bawah.
-      const sx = random(70, 120) / 100 * vw;
+          // Mulai dari kiri-atas, melintasi tengah layar ke kanan-bawah.
+          const sx = random(-20, 10) / 100 * vw;
       const sy = random(-20, 10) / 100 * vh;
-      const tx = random(-20, 30) / 100 * vw;
+          const tx = random(70, 120) / 100 * vw;
       const ty = random(60, 110) / 100 * vh;
       const dx = tx - sx, dy = ty - sy;
       s.style.left = sx + "px";
