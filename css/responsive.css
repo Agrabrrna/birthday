@@ -4,13 +4,11 @@
 
 @media (min-width: 600px) {
   .gallery { grid-template-columns: repeat(3, 1fr); }
-  .gift-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
   .letter-paper { padding: var(--space-4); }
 }
 
 @media (min-width: 1024px) {
   .gallery { grid-template-columns: repeat(4, 1fr); }
-  .gift-grid { grid-template-columns: repeat(5, 1fr); }
   .page-inner { padding-bottom: calc(var(--space-4) + 6rem); }
   /* Panel musik pindah ke pojok kanan bawah */
   .music-panel {

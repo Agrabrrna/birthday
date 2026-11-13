@@ -97,7 +97,7 @@
         <h2 class="section-title">Beberapa hadiah kecil.</h2>
         <p class="section-note">Tidak harus dibuka semua — satu saja cukup untuk melanjutkan. <span id="gift-counter" class="gift-counter" role="status">0/4 terbuka</span></p>
         <div id="gift-grid" class="gift-grid"></div>
-        <p class="secret-hint">psst… ada satu kotak yang sedikit berbeda.</p>
+        <p class="secret-hint"> </p>
         <div class="page-actions">
           <button class="btn btn-ghost" type="button" data-back="letter">Kembali</button>
           <button id="btn-gifts-next" class="btn btn-primary" type="button" data-next="ending" disabled>Next Journey</button>
@@ -110,10 +110,12 @@
       <div id="starfield" class="starfield" aria-hidden="true"></div>
       <div class="page-inner ending-inner">
         <p class="eyebrow">final scene · the end</p>
-        <div id="ending-body" class="ending-body"></div>
-        <p id="ending-signature" class="ending-signature"></p>
+                        <figure id="ending-photo" class="ending-photo" hidden>
+                          <img alt="Foto penutup" />
+                        </figure>
+                <div id="ending-body" class="ending-body"></div>
+                <p id="ending-signature" class="ending-signature"></p>
         <p id="ending-quote" class="ending-quote"></p>
-        <p class="ending-fin" aria-hidden="true">— end —</p>
         <button id="btn-replay" class="btn btn-ghost" type="button">↺ Replay</button>
       </div>
     </section>
@@ -152,7 +154,8 @@
       <p class="gift-card-eyebrow">sebuah hadiah kecil</p>
       <h3 id="gift-modal-title" class="gift-modal-title"></h3>
       <div id="gift-modal-flower" class="gift-modal-flower" hidden></div>
-      <div id="gift-modal-photo" class="gift-modal-photo" hidden></div>
+            <div id="gift-modal-cake" class="gift-modal-cake" hidden></div>
+            <div id="gift-modal-photo" class="gift-modal-photo" hidden></div>
       <p id="gift-modal-message" class="gift-modal-message"></p>
       <button id="gift-modal-close" class="btn btn-primary btn-small" type="button">Simpan di hati ♡</button>
     </div>

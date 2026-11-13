@@ -1,7 +1,7 @@
 // Render konten dari CONFIG + interaksi (polaroid, amplop, hadiah, chat rahasia).
 (() => {
   const $ = (id) => document.getElementById(id);
-
+// python -m http.server 8000 --directory D:\birthday
   // ---------- Helper ----------
   function photoNode(src, alt, label) {
     if (src) {
@@ -100,10 +100,10 @@
   const nextBtn = $("btn-gifts-next");
   const counter = $("gift-counter");
   const opened = new Set();
-  const icons = { sky: "☁️", sea: "🌊", small: "✨", last: "🌙" };
+  const icons = { sky: "☁️", sea: "🌊", small: "✨" };
 
   function updateCounter() {
-    counter.textContent = opened.size + "/4 terbuka";
+    counter.textContent = opened.size + "/" + CONFIG.gifts.length + " terbuka";
     nextBtn.disabled = opened.size === 0;
   }
 
@@ -132,10 +132,10 @@
     ];
     const flowers = [
       { x: 100, y: 78, r: 1.15 },
-      { x: 58, y: 96, r: 0.95 },
-      { x: 142, y: 96, r: 0.95 },
-      { x: 34, y: 122, r: 0.8 },
-      { x: 166, y: 122, r: 0.8 },
+      { x: 70, y: 96, r: 0.95 },
+      { x: 130, y: 96, r: 0.95 },
+      { x: 52, y: 122, r: 0.8 },
+      { x: 148, y: 122, r: 0.8 },
     ]
       .map((f, i) => {
         const [light, dark] = COLORS[i];
@@ -166,6 +166,125 @@
     );
   }
 
+  // Kue ulang tahun kartun (SVG): lilin menyala saat modal dibuka, padam saat diklik.
+  function cakeMarkup() {
+    // 3 lilin untuk 3 tingkat kue.
+                    const candles = [
+                    { x: 82, w: 5, c1: "#bfdbfe", c2: "#60a5fa" },
+                    { x: 100, w: 6, c1: "#fbcfe8", c2: "#f472b6" },
+                    { x: 118, w: 5, c1: "#fef3c7", c2: "#fbbf24" },
+                ];
+                const candlesHtml = candles.map((c, i) => {
+                        const stripes = Array.from({ length: 4 }, (_, s) =>
+                                  '<path d="M' + (c.x - c.w / 2) + ' ' + (34 + s * 4) + ' L' + (c.x + c.w / 2) + ' ' + (34 + s * 4) + '" stroke="' + (s % 2 ? "#94a3b8" : "#ffffff") + '" stroke-width="1"/>'
+                    ).join("");
+                    return (
+                      '<g class="cake-candle" data-candle="' + i + '" role="button" tabindex="0" aria-label="Tiup lilin ' + (i + 1) + '">' +
+                      '<rect x="' + (c.x - 5) + '" y="12" width="10" height="42" fill="transparent"/>' +
+                      '<rect x="' + (c.x - c.w / 2) + '" y="30" width="' + c.w + '" height="22" rx="' + (c.w / 2) + '" fill="url(#candle-grad-' + i + ')" pointer-events="none"/>' +
+                      stripes +
+                      '<g class="cake-flame">' +
+                      '<ellipse cx="' + c.x + '" cy="20" rx="4" ry="7" fill="url(#flame-grad)"/>' +
+                      '<ellipse cx="' + c.x + '" cy="24" rx="2" ry="4" fill="#fff7ed"/>' +
+                      '<ellipse cx="' + c.x + '" cy="25.5" rx="1" ry="2.2" fill="#fbbf24"/>' +
+                      '<line x1="' + c.x + '" y1="30" x2="' + c.x + '" y2="25" stroke="#7a4a2b" stroke-width="1.5"/>' +
+                      '</g>' +
+                      '<text class="cake-smoke" x="' + (c.x - 6) + '" y="10" font-size="13">💨</text>' +
+                      '</g>'
+                    );
+                  }).join("");
+
+          // Glaze frosting pink menetes dari pinggir atas tiap tingkat.
+                    const dripHeights = [14, 9, 18, 11, 16, 8, 14, 10, 15, 9, 12, 7];
+                    const dripHtml = dripHeights.map((len, i) => {
+                                const x = Math.round(77 + i * 4.3);
+                                return '<rect x="' + (x - 2.2) + '" y="58" width="4.4" height="' + len + '" rx="2.2" fill="url(#frosting)" pointer-events="none"/>';
+                    }).join("");
+
+          // Hiasan: taburan sprinkles, ruffle frosting, dan bunga rosette.
+                    const sprinkleColors = ["#f472b6", "#60a5fa", "#fbbf24", "#a78bfa", "#34d399", "#fb7185"];
+                    const sprinkles = [
+                      { x: 70, y: 88, a: 20 }, { x: 80, y: 96, a: 60 }, { x: 92, y: 86, a: 0 },
+                      { x: 104, y: 94, a: 40 }, { x: 116, y: 88, a: 70 }, { x: 126, y: 96, a: 15 },
+                      { x: 86, y: 90, a: 90 }, { x: 110, y: 84, a: 30 },
+                    ];
+                    const sprinkleHtml = sprinkles.map((s, i) =>
+                      '<rect x="' + (s.x - 1.5) + '" y="' + (s.y - 4) + '" width="3" height="8" rx="1.5" fill="' + sprinkleColors[i % sprinkleColors.length] + '" transform="rotate(' + s.a + ' ' + s.x + ' ' + s.y + ')" pointer-events="none"/>'
+                    ).join("");
+                    const scallop = (cx, rx, cy, n, r) => Array.from({ length: n }, (_, i) => {
+                      const x = cx - rx + (2 * rx * i) / (n - 1);
+                      return '<circle cx="' + x.toFixed(1) + '" cy="' + cy + '" r="' + r + '" fill="#fff5f9" stroke="#f3c2d6" stroke-width="0.5" pointer-events="none"/>';
+                    }).join("");
+                    const rosette = (x, y, c) =>
+                      '<g pointer-events="none">' +
+                      '<circle cx="' + (x - 3) + '" cy="' + y + '" r="3" fill="' + c + '"/>' +
+                      '<circle cx="' + (x + 3) + '" cy="' + y + '" r="3" fill="' + c + '"/>' +
+                      '<circle cx="' + x + '" cy="' + (y - 3) + '" r="3" fill="' + c + '"/>' +
+                      '<circle cx="' + x + '" cy="' + (y + 3) + '" r="3" fill="' + c + '"/>' +
+                      '<circle cx="' + x + '" cy="' + y + '" r="2" fill="#ffffff"/>' +
+                      '</g>';
+                    const rosetteHtml = [
+                      { x: 60, y: 120, c: "#f9a8d4" }, { x: 78, y: 124, c: "#fbcfe8" },
+                      { x: 122, y: 124, c: "#fbcfe8" }, { x: 140, y: 120, c: "#f9a8d4" },
+                    ].map(r => rosette(r.x, r.y, r.c)).join("");
+
+          return (
+            '<div class="cake" role="group" aria-label="Kue ulang tahun">' +
+            '<svg viewBox="0 0 200 150">' +
+              '<defs>' +
+              '<linearGradient id="flame-grad" x1="0" y1="0" x2="0" y2="1">' +
+              '<stop offset="0" stop-color="#fde68a"/><stop offset="0.55" stop-color="#fbbf24"/><stop offset="1" stop-color="#f97316"/>' +
+              '</linearGradient>' +
+              candles.map((c, i) =>
+                '<linearGradient id="candle-grad-' + i + '" x1="0" y1="0" x2="1" y2="0">' +
+                '<stop offset="0" stop-color="' + c.c1 + '"/><stop offset="1" stop-color="' + c.c2 + '"/>' +
+                '</linearGradient>'
+              ).join("") +
+              '<linearGradient id="cake-body" x1="0" y1="0" x2="0" y2="1">' +
+                                                    '<stop offset="0" stop-color="#fbe3ee"/><stop offset="1" stop-color="#f3c2d6"/>' +
+              '</linearGradient>' +
+                            '<linearGradient id="cake-rim" x1="0" y1="0" x2="0" y2="1">' +
+                                                    '<stop offset="0" stop-color="#fef1f8"/><stop offset="1" stop-color="#f7d3e4"/>' +
+              '</linearGradient>' +
+                                          '<linearGradient id="frosting" x1="0" y1="0" x2="0" y2="1">' +
+                                          '<stop offset="0" stop-color="#f9a8d4"/><stop offset="1" stop-color="#ec4899"/>' +
+                            '</linearGradient>' +
+                            '</defs>' +
+              // Lingkaran cahaya lembut di belakang kue
+                            '<circle class="cake-halo" cx="100" cy="80" r="68" fill="url(#flame-grad)" opacity="0.08" pointer-events="none"/>' +
+                            // Piring
+                                      '<ellipse cx="100" cy="134" rx="86" ry="9" fill="#f7e9e2" opacity="0.65"/>' +
+                                      '<ellipse cx="100" cy="132" rx="70" ry="7" fill="#fdf6f1" opacity="0.9"/>' +
+                                      // Tingkat bawah
+                                      '<rect x="44" y="102" width="112" height="32" rx="8" fill="url(#cake-body)" stroke="#e9a8c3" stroke-width="1"/>' +
+                                      '<ellipse cx="100" cy="102" rx="56" ry="9" fill="url(#cake-rim)"/>' +
+                                      // Ruffle frosting di bawah tingkat bawah
+                                      scallop(100, 56, 130, 15, 4.5) +
+                                      // Tingkat tengah
+                                      '<rect x="62" y="76" width="76" height="28" rx="7" fill="url(#cake-body)" stroke="#e9a8c3" stroke-width="1"/>' +
+                                      '<ellipse cx="100" cy="76" rx="38" ry="7" fill="url(#cake-rim)"/>' +
+                                      // Ruffle frosting di bawah tingkat tengah
+                                      scallop(100, 38, 102, 11, 3.6) +
+                                      // Tingkat atas
+                                      '<rect x="74" y="52" width="52" height="26" rx="6" fill="url(#cake-body)" stroke="#e9a8c3" stroke-width="1"/>' +
+                                      '<ellipse cx="100" cy="52" rx="26" ry="5" fill="url(#cake-rim)"/>' +
+                                      '<ellipse cx="94" cy="50" rx="11" ry="2.5" fill="#ffffff" opacity="0.5"/>' +
+                                      // Glaze frosting pink menetes dari tingkat atas
+                                      '<rect x="74" y="52" width="52" height="6" rx="3" fill="url(#frosting)"/>' +
+                                      dripHtml +
+                                      // Taburan sprinkles di tingkat tengah
+                                      sprinkleHtml +
+                                      // Bunga rosette di dasar tingkat bawah
+                                      rosetteHtml +
+                        // Lilin
+                        candlesHtml +
+                                      '<path d="M44 134 L156 134" stroke="#e9a8c3" stroke-width="1.5"/>' +
+                  '</svg>' +
+        '<p class="cake-hint">Tiup lilinnya — ketuk tiap lilin untuk memadamkan. ✨</p>' +
+        '</div>'
+      );
+    }
+
   CONFIG.gifts.forEach((g, i) => {
     const box = makeGiftBox(g.title, icons[g.icon] || "🎁");
     box.addEventListener("click", () => {
@@ -181,16 +300,32 @@
       const flowerWrap = $("gift-modal-flower");
       if (flowerWrap) {
         flowerWrap.innerHTML = "";
-        flowerWrap.hidden = !g.flowerPhoto;
-        if (g.flowerPhoto) {
-          const img = document.createElement("img");
-          img.src = g.flowerPhoto;
-          img.alt = "Buket bunga";
-          img.loading = "lazy";
-          flowerWrap.appendChild(img);
-        }
-      }
-      openDialog(giftModal, box);
+              flowerWrap.classList.toggle("is-sway", !!g.flowerPhoto);
+              flowerWrap.hidden = !g.flowerPhoto;
+              if (g.flowerPhoto) {
+                const img = document.createElement("img");
+                img.src = g.flowerPhoto;
+                img.alt = "Buket bunga";
+                img.loading = "lazy";
+                flowerWrap.appendChild(img);
+              }
+            }
+            const cakeWrap = $("gift-modal-cake");
+            if (cakeWrap) {
+              cakeWrap.innerHTML = "";
+              cakeWrap.hidden = !g.cake;
+              if (g.cake) {
+                cakeWrap.innerHTML = cakeMarkup();
+                cakeWrap.querySelectorAll(".cake-candle").forEach((candle) => {
+                  const blowOut = () => candle.classList.add("is-out");
+                  candle.addEventListener("click", blowOut);
+                  candle.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); blowOut(); }
+                  });
+                });
+              }
+            }
+            openDialog(giftModal, box);
     });
     giftGrid.appendChild(box);
   });
@@ -262,6 +397,11 @@
   $("ending-signature").textContent = CONFIG.endingSignature;
   $("ending-signature").classList.add("ending-signature");
   $("ending-quote").textContent = CONFIG.endingQuote;
+  const endingPhoto = $("ending-photo");
+  if (CONFIG.endingPhoto) {
+    endingPhoto.querySelector("img").src = CONFIG.endingPhoto;
+    endingPhoto.hidden = false;
+  }
   const fin = document.querySelector(".ending-fin");
   $("ending-body").appendChild($("ending-signature"));
   $("btn-replay").addEventListener("click", () => {
@@ -297,13 +437,19 @@
   document.addEventListener("page:changed", (e) => {
     if (e.detail.id === "birthday") Anim.revealLines($("birthday-lines"), 1200);
     if (e.detail.id === "ending") {
-      Anim.revealLines($("ending-body"), 1800);
-      const total = CONFIG.ending.length * 1800 + 1000;
-      [$("ending-quote"), fin].forEach((el, i) => {
-        setTimeout(() => el.classList.add("is-shown"), Anim.reduced ? 0 : total + i * 1600);
-      });
-    }
+          const photo = $("ending-photo");
+          photo.classList.add("is-shown");
+          Anim.revealLines($("ending-body"), 1800);
+          const total = CONFIG.ending.length * 1800 + 1000;
+          [$("ending-quote"), fin].forEach((el, i) => {
+            setTimeout(() => el.classList.add("is-shown"), Anim.reduced ? 0 : total + i * 1600);
+          });
+        }
   });
   // Halaman awal saat load dengan hash langsung
   if (Nav.current === "birthday") Anim.revealLines($("birthday-lines"), 1200);
+    if (Nav.current === "ending") {
+      $("ending-photo").classList.add("is-shown");
+      Anim.revealLines($("ending-body"), 1800);
+    }
 })();

@@ -23,7 +23,7 @@ const CONFIG = {
   // Jika src null, ditampilkan placeholder bernomor sampai foto diisi.
   memories: [
     { src: "assets/images/memories/fotokucing.jpg", caption: "Kak nop dengan kucing lugunya", alt: "Foto kenangan 1" },
-    { src: "assets/images/memories/foto2.jpg", caption: "Hari-hari di CNB mulu", alt: "Foto kenangan 2" },
+    { src: "assets/images/memories/foto2.jpg", caption: "Hari-hari di CNB", alt: "Foto kenangan 2" },
     { src: "assets/images/memories/foto3.jpg", caption: "Kirim pap pertama di titkok, sangat menggemaskan", alt: "Foto kenangan 3" },
     { src: "assets/images/memories/foto4.jpg", caption: "Ini katanya makeupnya lagi oke banget dan aku setuju", alt: "Foto kenangan 4" },
     { src: "assets/images/memories/firstmeet.jpg", caption: "First meet dengan kak novi, ahayy", alt: "Foto kenangan 5" },
@@ -50,19 +50,15 @@ const CONFIG = {
     {
       title: "Kado Kedua",
       icon: "sea",
-      message: "Seperti laut yang kadang tenang dan kadang punya ombak besar, hidup juga terasa seperti itu. Kalau suatu saat semuanya terasa melelahkan, jangan lupa untuk istirahat. Kak novi enggak harus selalu kuat setiap waktu. Take your time, everything has its own pace.",
-    },
+          cake: true,
+          message: "Seperti laut yang kadang tenang dan kadang punya ombak besar, hidup juga terasa seperti itu. Kalau suatu saat semuanya terasa melelahkan, jangan lupa untuk istirahat. Kak novi enggak harus selalu kuat setiap waktu. Take your time, everything has its own pace.",
+        },
     {
-      title: "Kado Kecil",
+      title: "Kado Terakhir",
       icon: "small",
       // Ganti photo dengan foto kejutan, mis. "assets/images/memories/kejutan.webp"
       photo: "assets/images/memories/fotokecil2.jpg",
       message: "Mungkin kak novi enggak sadar, tetapi kehadiran kak novi bisa memberikan kesan baik untuk orang-orang di sekitar termasuk aku. Terima kasih sudah menjadi orang yang menyenangkan untuk dikenal. I’m genuinely glad that our paths crossed.",
-    },
-    {
-      title: "Kado Terakhir",
-      icon: "last",
-      message: "Kalau boleh berharap, semoga di usia 24 tahun ini kak novi tidak hanya tumbuh menjadi seseorang yang hebat, tetapi juga seseorang yang lebih bahagia. Terima kasih sudah menjadi sosok kakak yang baik. Semoga suatu saat nanti, ketika melihat kembali perjalanan hidup, kak nop bangga dengan diri sendiri. You deserved all the good things in life.",
     },
   ],
 
@@ -79,6 +75,7 @@ const CONFIG = {
     ],
   },
 
+  endingPhoto: "assets/images/memories/fotokecil.jpg",
   ending: [
     "And finally, here we are, at the end of this little journey.",
     "Kak novi, mungkin halaman ini sederhana dan ga seberapa dibandingkan dengan banyak hal lain yang pantas kak novi dapatkan. Tapi aku berharap, setidaknya ada sedikit senyum yang muncul ketika kak novi membacanya.",
@@ -89,7 +86,7 @@ const CONFIG = {
     "With lots of warmth, from someone who’s grateful to know you",
   ],
   endingSignature: "-dd",
-  endingQuote: "Somewhere under the same sky.",
+    // Foto besar di bagian ending. Kosongkan dengan "" untuk menyembunyikan.
 
   music: {
     // Video dari brief: https://youtu.be/kiTSuy6kwAc ("Coming Up Roses" loop).
