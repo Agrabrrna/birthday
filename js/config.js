@@ -25,13 +25,13 @@ const CONFIG = {
     { src: "assets/images/memories/fotokucing.jpg", caption: "Kak nop dengan kucing lugunya", alt: "Foto kenangan 1" },
     { src: "assets/images/memories/foto2.jpg", caption: "Hari-hari di CNB", alt: "Foto kenangan 2" },
     { src: "assets/images/memories/foto3.jpg", caption: "Kirim pap pertama di titkok, sangat menggemaskan", alt: "Foto kenangan 3" },
-    { src: "assets/images/memories/foto4.jpg", caption: "Ini katanya makeupnya lagi oke banget dan aku setuju", alt: "Foto kenangan 4" },
+    { src: "assets/images/memories/foto4.jpg", caption: "Ini katanya makeupnya lagi bagus banget dan aku setuju", alt: "Foto kenangan 4" },
     { src: "assets/images/memories/firstmeet.jpg", caption: "First meet dengan kak novi, ahayy", alt: "Foto kenangan 5" },
     { src: "assets/images/memories/kaknoi.jpg", caption: "Aku menyebutnya dengan kak noi, karena dilarang \"P\"", alt: "Foto kenangan 6" },
   ],
 
   letter: [
-    "Sudah 24 tahun ya kak novi? Pasti ada banyak hal yang sudah kak nop lewati sampai akhirnya bisa berada di titik ini. Ku cuma mau berharap semoga di usia yang baru nanti, hidup kak novi bisa lebih ramah sama kakak yaa.",
+    "Hari ini sudah 24 tahun ya kak novi? Pasti ada banyak hal yang sudah kak nop lewati sampai akhirnya bisa berada di titik ini. Ku cuma mau berharap semoga di usia yang baru nanti, hidup kak novi bisa lebih ramah sama kakak yaa.",
     "Semoga hal-hal yang selama ini kak novi usahakan bisa menemukan hasil terbaiknya. Semoga selalu dikelilingi orang-orang yang tulus, dipertemukan dengan banyak kebahagiaan kecil, dan enggak pernah kehilangan alasan untuk tersenyum (cause i like your smile).",
     "Kalau suatu hari semuanya terasa berat, semoga kak novi ingat kalau kak nop enggak harus selalu baik-baik saja. Tidak apa-apa untuk istirahat, bingung, atau bahkan merasa tertinggal. Kak novi punya waktu sendiri, jadi jangan terlalu sering membandingkan perjalanan kak nop dengan orang lain.",
     "Terima kasih sudah menjadi bagian dari cerita dan hari-hari yang ada. Aku harap di usia 24 ini, kakak bisa lebih banyak menemukan hal yang membuat kak novi bahagia, lebih sedikit memikirkan hal yang menyakitkan, dan semakin menyayangi diri sendiri.",
