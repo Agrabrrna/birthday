@@ -333,7 +333,7 @@
   // Hadiah rahasia: chat WhatsApp
   const secret = CONFIG.secretGift;
   const secretModal = $("secret-modal");
-  const secretBox = makeGiftBox("Seseorang mengucapkan sesuatu?!", " ");
+  const secretBox = makeGiftBox("Ada yang mengucapkan sesuatu?!", " ");
   secretBox.classList.add("is-secret");
   secretBox.setAttribute("aria-label", "Buka hadiah rahasia");
   giftGrid.appendChild(secretBox);

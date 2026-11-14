@@ -517,22 +517,22 @@ button { font-family: inherit; }
   left: 50%;
   transform: translateX(-50%);
   bottom: env(safe-area-inset-bottom);
-  width: min(96vw, 460px);
+  width: min(92vw, 340px);
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 0.6rem;
   background: rgba(5, 10, 20, 0.72);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: var(--radius) var(--radius) 0 0;
-  padding: 0.6rem var(--space-2);
+  padding: 0.4rem 0.7rem;
   z-index: 45;
   box-shadow: 0 -6px 30px rgba(3, 8, 18, 0.6), 0 0 0 1px rgba(56, 189, 248, 0.08) inset;
 }
 
 /* ---------- Piringan hitam (vinyl) ---------- */
 
-.vinyl { position: relative; flex: 0 0 auto; width: 84px; height: 84px; }
+.vinyl { position: relative; flex: 0 0 auto; width: 52px; height: 52px; }
 .vinyl-disc {
   position: absolute;
   inset: 0;
@@ -560,10 +560,10 @@ button { font-family: inherit; }
 
 .vinyl-arm {
   position: absolute;
-  top: -6px;
-  right: 2px;
-  width: 3px;
-  height: 46px;
+  top: -4px;
+  right: 1px;
+  width: 2px;
+  height: 28px;
   border-radius: 3px;
   background: linear-gradient(180deg, #cbd5e1, #64748b);
   transform-origin: top center;
@@ -574,11 +574,11 @@ button { font-family: inherit; }
 .vinyl-arm::after {
   content: "";
   position: absolute;
-  bottom: -5px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 11px;
-  height: 11px;
+  width: 8px;
+  height: 8px;
   border-radius: 2px;
   background: var(--accent);
   box-shadow: 0 0 10px var(--glow);
@@ -597,9 +597,9 @@ button { font-family: inherit; }
   pointer-events: none;
 }
 
-.music-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; min-width: 0; }
-.music-title { font-size: 0.72rem; color: var(--ivory); letter-spacing: 0.05em; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#btn-play, #btn-pause { min-height: 44px; }
+.music-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.4rem; min-width: 0; }
+.music-title { font-size: 0.68rem; color: var(--ivory); letter-spacing: 0.04em; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#btn-play, #btn-pause { min-height: 32px; padding: 0.25rem 0.6rem; font-size: 0.75rem; }
 #btn-play.btn-primary { background: var(--accent); color: var(--night); box-shadow: 0 0 18px var(--glow); }
 #btn-play.btn-primary:hover { background: var(--ivory); }
 #btn-pause.btn-ghost { color: var(--ivory); border-color: rgba(125, 211, 252, 0.4); background: transparent; }
